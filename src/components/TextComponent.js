@@ -1,6 +1,6 @@
 import React from "react";
 
-const TextComponent = ({title, name}) => {
+const TextComponent = ({ title, name, value, handleChange }) => {
   return (
     <>
       <label htmlFor="" className="w-full text-base font-bold">
@@ -9,6 +9,8 @@ const TextComponent = ({title, name}) => {
       <textarea
         name={name}
         id={name}
+        onChange={handleChange}
+        value={value}
         cols="30"
         rows="10"
         className="border mt-3 border-[#2fa0cd] focus:ring-2 focus:ring-[#2fa0cd]  px-4 py-3 w-[100%] outline-none rounded-xl text-sm text-[#474d59] placeholder:text-[#606879] transition-all duration-300 ease-in-out resize-none"
