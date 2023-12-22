@@ -49,7 +49,7 @@ const UbicacionForm = () => {
   };
 
   useEffect(() => {
-    fetchProyectos();
+    fetchProyectos();              
   }, []);
 
   return (
@@ -124,7 +124,7 @@ const UbicacionForm = () => {
             handleChange={handleChange}
           />
         </div>
-        <div className="flex justify-center mt-10">
+        <div className="flex justify-center my-10">
           <button className="w-full sm:w-[50%] bg-[#ff5151] p-2 rounded-lg text-[#ffffff] font-bold hover:opacity-70 transition-all duration-300 ease-in-out">
             Guardar Datos
           </button>

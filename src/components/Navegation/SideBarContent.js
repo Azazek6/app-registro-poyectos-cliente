@@ -87,7 +87,7 @@ const SideBarContent = ({ children }) => {
           </div>
         </div>
         {/* CONTENIDO */}
-        <div className="w-[100%] p-5 overflow-x-auto max-h-[720px] sd:max-h-[100px]">
+        <div className="w-[100%] p-5 overflow-x-auto h-[650px]">
           {children}
         </div>
       </div>
