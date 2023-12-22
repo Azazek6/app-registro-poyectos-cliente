@@ -3,7 +3,7 @@ import React from "react";
 const TextComponent = ({ style, title, name, value, handleChange }) => {
   return (
     <>
-      <label htmlFor="" className="w-full text-base font-bold">
+      <label htmlFor={name} className="w-full text-base font-bold">
         {title}
       </label>
       <textarea
