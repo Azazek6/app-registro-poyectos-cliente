@@ -3,8 +3,6 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { FaBars } from "react-icons/fa6";
 import { HiGlobeAmericas, HiIdentification, HiFolder } from "react-icons/hi2";
-import { useGlobal } from "@/context/GlobalProvider";
-import jwt_decode from "jwt-decode";
 
 const SideBarContent = ({ children }) => {
   const [toogleSideBar, setToogleSideBar] = useState(true);
@@ -39,15 +37,6 @@ const SideBarContent = ({ children }) => {
               >
                 <HiIdentification className="text-xl" />
                 Datos Generales
-              </Link>
-            </div>
-            <div className="w-[100%] border-b-2 p-[19px]">
-              <Link
-                href="/home/ubicacion"
-                className="flex items-center ml-10 gap-5 text-[#606879] hover:text-[#FF5151] font-bold text-sm transition-all duration-300 ease-in-out"
-              >
-                <HiGlobeAmericas className="text-xl" />
-                Ubicaci&oacute;n Geogr&aacute;fica
               </Link>
             </div>
             <div className="w-[100%] border-b-2 p-[19px]">
@@ -87,7 +76,7 @@ const SideBarContent = ({ children }) => {
           </div>
         </div>
         {/* CONTENIDO */}
-        <div className="w-[100%] p-5 overflow-x-auto h-[650px]">
+        <div className="w-[100%] p-5 overflow-x-auto h-screen">
           {children}
         </div>
       </div>

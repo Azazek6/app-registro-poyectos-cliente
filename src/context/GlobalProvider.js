@@ -42,11 +42,8 @@ export const GlobalContextProvider = ({ children }) => {
     }
   };
 
-  // ------------------------- UBICACION -------------------------------
+  // ------------------------- ADMINISTRACION -------------------------------
   // ------------------------- Crear
-  const crearUbicacion = async (ubicacion) => {
-    return await axios.post(`${host_server}/ubicaciones`, ubicacion);
-  };
 
   return (
     <GlobalContext.Provider
@@ -56,7 +53,6 @@ export const GlobalContextProvider = ({ children }) => {
         fetchClientesDocumento,
         crearProyecto,
         fetchProyectos,
-        crearUbicacion,
       }}
     >
       {children}

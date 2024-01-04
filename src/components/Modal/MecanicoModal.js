@@ -29,7 +29,7 @@ const ClientModal = ({ dataClient, open, setOpen, cancelButtonRef }) => {
     type: "",
     document: "",
     names: "",
-    rol: "CLIENTE"
+    rol: "MECANICO",
   });
 
   const handleChange = ({ target: { name, value } }) => {
@@ -46,7 +46,7 @@ const ClientModal = ({ dataClient, open, setOpen, cancelButtonRef }) => {
       type: "",
       document: "",
       names: "",
-      rol: "CLIENTE"
+      rol: "MECANICO",
     });
   };
 
@@ -62,7 +62,7 @@ const ClientModal = ({ dataClient, open, setOpen, cancelButtonRef }) => {
 
       if (status == 200) {
         toastMessage("Cliente encontrado", 1);
-        dataClient.id_cliente = data.id_persona;
+        dataClient.id_cliente = data.id_cliente;
         dataClient.documento = `${data.tipo_documento}: ${data.documento}`;
         setClient({
           id: data.id_cliente,
@@ -137,7 +137,7 @@ const ClientModal = ({ dataClient, open, setOpen, cancelButtonRef }) => {
                     </div> */}
                       <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                         <h2 className="my-5 text-base sm:text-xl font-bold uppercase text-[#606879]">
-                          Datos del Cliente
+                          Datos del Mecanico
                         </h2>
                         {!existClient && (
                           <div className="w-[100%] flex-row gap-5 items-center sm:flex mt-3">

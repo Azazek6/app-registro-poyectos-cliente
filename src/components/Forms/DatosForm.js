@@ -3,9 +3,12 @@ import moment from "moment";
 import InputField from "../InputField";
 import SelectedComponent from "../SelectedComponent";
 import CheckComponent from "../CheckComponent";
+import TextComponent from "../TextComponent";
 import ClientModal from "../Modal/ClientModal";
+import Distrito from "@/samples/distritos.json";
+import Provincia from "@/samples/provincias.json";
 import { useGlobal } from "@/context/GlobalProvider";
-import { toastMessage } from "@/helpers/general";
+import { toastMessage, orderElementForName } from "@/helpers/general";
 
 const listDivision = [
   {
@@ -44,6 +47,11 @@ const DatosForm = () => {
     contacto: "",
     fecha_inicio: moment().format("YYYY-MM-DD"),
     fecha_termino: "",
+    distrito: "",
+    provincia: "",
+    direccion: "",
+    altitud: "",
+    referencia: "",
     estado: "",
   });
 
@@ -59,8 +67,13 @@ const DatosForm = () => {
       id_cliente: "",
       documento: "",
       contacto: "",
-      fecha_inicio: "",
+      fecha_inicio: moment().format("YYYY-MM-DD"),
       fecha_termino: "",
+      distrito: "",
+      provincia: "",
+      direccion: "",
+      altitud: "",
+      referencia: "",
       estado: "",
     });
   };
@@ -200,6 +213,64 @@ const DatosForm = () => {
               />
             </div>
           </div>
+          <div className="flex-row sm:flex items-center gap-5 mt-5">
+            <div className="w-full sm:w-[50%]">
+              <div className="flex-row">
+                <SelectedComponent
+                  title="Distrito"
+                  titleOption="Seleccionar"
+                  data={orderElementForName(Distrito)}
+                  valueId={2}
+                  name="distrito"
+                  value={datosForm.distrito}
+                  handleChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="w-full sm:w-[50%] mt-5 sm:mt-0">
+              <SelectedComponent
+                title="Provincia"
+                titleOption="Seleccionar"
+                data={orderElementForName(Provincia)}
+                valueId={2}
+                name="provincia"
+                value={datosForm.provincia}
+                handleChange={handleChange}
+              />
+            </div>
+          </div>
+          <div className="flex-row sm:flex items-center gap-5 mt-5">
+            <div className="w-full sm:w-[50%]">
+              <div className="flex-row">
+                <InputField
+                  title="Dirección"
+                  name="direccion"
+                  value={datosForm.direccion}
+                  handleChange={handleChange}
+                  style="w-full"
+                />
+              </div>
+            </div>
+            <div className="w-full sm:w-[50%] mt-5 sm:mt-0">
+              <InputField
+                title="Altitud"
+                name="altitud"
+                value={datosForm.altitud}
+                handleChange={handleChange}
+                placeholder="1000 mmsn"
+                type="number"
+                style="w-full"
+              />
+            </div>
+          </div>
+          <div className="mt-5">
+            <TextComponent
+              title="Referencia"
+              name="referencia"
+              value={datosForm.referencia}
+              handleChange={handleChange}
+            />
+          </div>
           <div className="flex justify-center mt-1 sm:mt-10">
             <CheckComponent
               title="En Proceso"
@@ -208,7 +279,7 @@ const DatosForm = () => {
               classStyle="sm:w-[20%] sm:mt-0 mt-8"
             />
           </div>
-          <div className="flex justify-center mt-10">
+          <div className="flex justify-center mt-10 mb-20 flex-col items-center">
             <button className="w-full sm:w-[50%] mb-5 bg-[#ff5151] p-2 rounded-lg text-[#ffffff] font-bold hover:opacity-70 transition-all duration-300 ease-in-out">
               Guardar Datos
             </button>
