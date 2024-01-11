@@ -29,7 +29,7 @@ const ClientModal = ({ dataClient, open, setOpen, cancelButtonRef }) => {
     type: "",
     document: "",
     names: "",
-    rol: "CLIENTE"
+    rol: "CLIENTE",
   });
 
   const handleChange = ({ target: { name, value } }) => {
@@ -46,7 +46,7 @@ const ClientModal = ({ dataClient, open, setOpen, cancelButtonRef }) => {
       type: "",
       document: "",
       names: "",
-      rol: "CLIENTE"
+      rol: "CLIENTE",
     });
   };
 
@@ -58,7 +58,10 @@ const ClientModal = ({ dataClient, open, setOpen, cancelButtonRef }) => {
     }
 
     try {
-      const { status, data } = await fetchClientesDocumento(searchDocument);
+      const { status, data } = await fetchClientesDocumento(
+        searchDocument,
+        "CLIENTE"
+      );
 
       if (status == 200) {
         toastMessage("Cliente encontrado", 1);

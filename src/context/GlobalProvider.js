@@ -22,8 +22,10 @@ export const GlobalContextProvider = ({ children }) => {
   };
 
   // ------------------------ Listar por documento
-  const fetchClientesDocumento = async (documento) => {
-    return await axios.get(`${host_server}/clientes/documento/${documento}`);
+  const fetchClientesDocumento = async (documento, rol) => {
+    return await axios.get(
+      `${host_server}/clientes/documento/${documento}/rol/${rol}`
+    );
   };
 
   // ------------------------- PROYECTOS -------------------------------
@@ -44,6 +46,9 @@ export const GlobalContextProvider = ({ children }) => {
 
   // ------------------------- ADMINISTRACION -------------------------------
   // ------------------------- Crear
+  const crearDatosAdministrativos = async (dato) => {
+    return await axios.post(`${host_server}/datos`, dato);
+  };
 
   return (
     <GlobalContext.Provider
@@ -53,6 +58,7 @@ export const GlobalContextProvider = ({ children }) => {
         fetchClientesDocumento,
         crearProyecto,
         fetchProyectos,
+        crearDatosAdministrativos,
       }}
     >
       {children}

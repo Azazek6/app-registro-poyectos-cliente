@@ -58,17 +58,18 @@ const ClientModal = ({ dataClient, open, setOpen, cancelButtonRef }) => {
     }
 
     try {
-      const { status, data } = await fetchClientesDocumento(searchDocument);
+      const { status, data } = await fetchClientesDocumento(searchDocument, 'SISME');
 
       if (status == 200) {
-        toastMessage("Cliente encontrado", 1);
-        dataClient.id_cliente = data.id_cliente;
-        dataClient.documento = `${data.tipo_documento}: ${data.documento}`;
+        toastMessage("Sisme encontrado", 1);
+        dataClient.id_sisme = data.id_persona;
+        dataClient.sisme = `Nombre: ${data.nombre}`;
         setClient({
-          id: data.id_cliente,
+          id: data.id_persona,
           type: data.tipo_documento,
           document: data.documento,
           names: data.nombre,
+          rol: data.rol,
         });
         setOpen(false);
       }
@@ -85,8 +86,8 @@ const ClientModal = ({ dataClient, open, setOpen, cancelButtonRef }) => {
       const { status, data } = await crearCliente(client);
 
       if (status == 201) {
-        dataClient.id_cliente = data.id_cliente;
-        dataClient.documento = `${client.type}: ${client.document}`;
+        dataClient.id_sisme = data.id_persona;
+        dataClient.sisme = `Nombre: ${client.names}`;
         toastMessage(data.message, 1);
         clearData();
         setOpen(false);

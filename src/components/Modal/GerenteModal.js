@@ -17,7 +17,7 @@ const listDocument = [
   },
 ];
 
-const ClientModal = ({ dataClient, open, setOpen, cancelButtonRef }) => {
+const GerenteModal = ({ dataClient, open, setOpen, cancelButtonRef }) => {
   const { crearCliente, fetchClientesDocumento } = useGlobal();
   const router = useRouter();
 
@@ -29,7 +29,7 @@ const ClientModal = ({ dataClient, open, setOpen, cancelButtonRef }) => {
     type: "",
     document: "",
     names: "",
-    rol: "GERENTE"
+    rol: "GERENTE",
   });
 
   const handleChange = ({ target: { name, value } }) => {
@@ -46,7 +46,7 @@ const ClientModal = ({ dataClient, open, setOpen, cancelButtonRef }) => {
       type: "",
       document: "",
       names: "",
-      rol: "GERENTE"
+      rol: "GERENTE",
     });
   };
 
@@ -58,17 +58,21 @@ const ClientModal = ({ dataClient, open, setOpen, cancelButtonRef }) => {
     }
 
     try {
-      const { status, data } = await fetchClientesDocumento(searchDocument);
+      const { status, data } = await fetchClientesDocumento(
+        searchDocument,
+        "GERENTE"
+      );
 
       if (status == 200) {
         toastMessage("Gerente encontrado", 1);
-        dataClient.id_cliente = data.id_cliente;
-        dataClient.documento = `${data.tipo_documento}: ${data.documento}`;
+        dataClient.id_gerente = data.id_persona;
+        dataClient.gerente = `Nombre: ${data.nombre}`;
         setClient({
-          id: data.id_cliente,
+          id: data.id_persona,
           type: data.tipo_documento,
           document: data.documento,
           names: data.nombre,
+          rol: data.rol,
         });
         setOpen(false);
       }
@@ -85,8 +89,8 @@ const ClientModal = ({ dataClient, open, setOpen, cancelButtonRef }) => {
       const { status, data } = await crearCliente(client);
 
       if (status == 201) {
-        dataClient.id_cliente = data.id_cliente;
-        dataClient.documento = `${client.type}: ${client.document}`;
+        dataClient.id_gerente = data.id_persona;
+        dataClient.gerente = `Nombre: ${client.names}`;
         toastMessage(data.message, 1);
         clearData();
         setOpen(false);
@@ -244,4 +248,4 @@ const ClientModal = ({ dataClient, open, setOpen, cancelButtonRef }) => {
   );
 };
 
-export default ClientModal;
+export default GerenteModal;
