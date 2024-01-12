@@ -5,6 +5,14 @@ import {
   HiMiniXCircle,
 } from "react-icons/hi2";
 
+export const tokenValidate = () => {
+  const token = localStorage.getItem("sddecomx");
+
+  if (!token) {
+    window.location.href = "/";
+  }
+};
+
 export const toastMessage = (message, status) => {
   toast(message, {
     icon:

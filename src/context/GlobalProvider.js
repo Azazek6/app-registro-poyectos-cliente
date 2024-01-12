@@ -1,6 +1,5 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
-import jwt_decode from "jwt-decode";
 import { GlobalContext } from "./GlobalContext";
 import { host_server } from "@/configurations/utils";
 
@@ -14,6 +13,13 @@ export const useGlobal = () => {
 
 export const GlobalContextProvider = ({ children }) => {
   const [proyecto, setProyecto] = useState([]);
+  const [reporte, setReporte] = useState([]);
+
+  // -------------------------- INICIAR SESION ----------------------
+  const signIn = async (user) => {
+    return await axios.post(`${host_server}/auth/signin`, user);
+  };
+
   // ------------------------ CLIENTES -------------------------------
 
   // ------------------------ crear
@@ -50,15 +56,28 @@ export const GlobalContextProvider = ({ children }) => {
     return await axios.post(`${host_server}/datos`, dato);
   };
 
+  // ------------------------- REPORTES ------------------------------------
+  const fetchReporteProyectos = async () => {
+    try {
+      const { data } = await axios.get(`${host_server}/proyectos/reporte`);
+      setReporte(data);
+    } catch (error) {
+      setReporte([]);
+    }
+  };
+
   return (
     <GlobalContext.Provider
       value={{
         proyecto,
+        reporte,
+        signIn,
         crearCliente,
         fetchClientesDocumento,
         crearProyecto,
         fetchProyectos,
         crearDatosAdministrativos,
+        fetchReporteProyectos,
       }}
     >
       {children}

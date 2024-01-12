@@ -1,11 +1,31 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { FaBars } from "react-icons/fa6";
-import { HiGlobeAmericas, HiIdentification, HiFolder } from "react-icons/hi2";
+import jwt_decode from "jwt-decode";
+import { HiDocumentText, HiIdentification, HiFolder } from "react-icons/hi2";
 
 const SideBarContent = ({ children }) => {
+  const router = useRouter();
+
   const [toogleSideBar, setToogleSideBar] = useState(true);
+  const [userData, setUserData] = useState(null);
+
+  const signOut = () => {
+    localStorage.removeItem("sddecomx");
+    setTimeout(() => {
+      router.push("/");
+    }, 500);
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("sddecomx");
+
+    if (token) {
+      const data = jwt_decode(token);
+      setUserData(data);
+    }
+  }, []);
 
   return (
     <div className="w-[100%] flex h-screen bg-[#efeff7] overflow-hidden">
@@ -23,7 +43,7 @@ const SideBarContent = ({ children }) => {
         {toogleSideBar && (
           <>
             <h2 className="mt-5 text-center text-xs text-[#606879]">
-              Rebeca Berenice De la Cruz Acate
+              {userData?.nombre} {userData?.apellidos}
             </h2>
 
             <h3 className="mt-3 text-center uppercase p-5 text-sm font-bold text-[#FF5151]">
@@ -48,6 +68,15 @@ const SideBarContent = ({ children }) => {
                 Datos Administrativos
               </Link>
             </div>
+            <div className="w-[100%] border-b-2 p-[19px]">
+              <Link
+                href="/home/reportes"
+                className="flex items-center ml-10 gap-5 text-[#606879] hover:text-[#FF5151] font-bold text-sm transition-all duration-300 ease-in-out"
+              >
+                <HiDocumentText className="text-xl" />
+                Reportes
+              </Link>
+            </div>
           </>
         )}
       </div>
@@ -69,6 +98,7 @@ const SideBarContent = ({ children }) => {
             <p className="text-xs sm:text-sm text-[#606879]">ADMINISTRADOR</p>
             <Link
               href="#"
+              onClick={signOut}
               className="text-xs sm:text-sm text-[#FF5151] hover:opacity-70 hover:text-[#606879] transition-all duration-300 ease-in-out"
             >
               Cerrar sesi&oacute;n
@@ -76,9 +106,7 @@ const SideBarContent = ({ children }) => {
           </div>
         </div>
         {/* CONTENIDO */}
-        <div className="w-[100%] p-5 overflow-x-auto h-screen">
-          {children}
-        </div>
+        <div className="w-[100%] p-5 overflow-x-auto h-screen">{children}</div>
       </div>
     </div>
   );
